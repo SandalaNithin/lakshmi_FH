@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import AboutUs from './pages/About';
 import Home from './pages/Home';
 import ContactPage from './pages/Contact';
+import PrivacyPolicy from './pages/Privacy';
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactPage />} />
+           <Route path="/Privacy" element={<PrivacyPolicy />} />
           </Routes>
         </main>
         <Footer />

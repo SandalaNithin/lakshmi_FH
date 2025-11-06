@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import Main from "../assets/Main.jpg";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -23,6 +24,10 @@ export default function Contact() {
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
+  const mapLink =
+    "https://www.google.com/maps?q=S+S+Kalyana+Mandapam,+Buchireddypalem,+Nellore,+Andhra+Pradesh";
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
       {/* Hero Section */}
@@ -33,7 +38,7 @@ export default function Contact() {
             <div className="flex gap-4">
               <div className="w-48 h-48 bg-gray-300 rounded-lg overflow-hidden shadow-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1519167758481-83f29da8c43a?w=400&h=400&fit=crop" 
+                  src={Main}
                   alt="Banquet Hall Interior"
                   className="w-full h-full object-cover"
                 />
@@ -136,8 +141,8 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-800 text-lg mb-1">Phone</h3>
-                <a href="tel:9581490491" className="text-amber-700 hover:text-amber-800 text-xl">
-                  9581490491
+                <a href="tel:7981862253" className="text-amber-700 hover:text-amber-800 text-xl">
+                  7981862253
                 </a>
               </div>
             </div>
@@ -153,7 +158,7 @@ export default function Contact() {
                   href="mailto:vaaraahi.gachibowli@gmail.com" 
                   className="text-amber-700 hover:text-amber-800 break-all"
                 >
-                  vaaraahi.gachibowli@gmail.com
+                  Lakshmifunctionhall@gmail.com
                 </a>
               </div>
             </div>
@@ -164,33 +169,40 @@ export default function Contact() {
                 <MapPin className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800 text-lg mb-1">Gachibowli</h3>
+                <h3 className="font-semibold text-gray-800 text-lg mb-1">BuchiReddyPalem</h3>
                 <p className="text-gray-700">
-                  Level 3, SLN Terminus, Jayabheri Enclave, Gachibowli, Hyderabad, Telangana 500032
+                 Ramakrishnanager , BuchiReddyPalem, Nellore, Andhra Pradesh, India
                 </p>
               </div>
             </div>
 
             {/* Map */}
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=400&fit=crop" 
-                  alt="Map Location"
-                  className="w-full h-full object-cover"
-                />
-                <div className="text-center mt-2">
-                  <a 
-                    href="https://maps.google.com/?q=Vaaraahi+Banquets+Gachibowli+Hyderabad" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-amber-700 hover:text-amber-800 font-medium"
-                  >
-                    View larger map →
-                  </a>
-                </div>
-              </div>
-            </div>
+            <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden relative group">
+             {/* Clickable Map Image */}
+  <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23431.07905702894!2d79.86867007281447!3d14.539746499402693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4c922a8a8209b3%3A0x8a1a4e32b6e4c59e!2sS%20S%20Kalyana%20Mandapam!5e0!3m2!1sen!2sin!4v1761805294698!5m2!1sen!2sin"
+        width="600"
+        height="450"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title="Google Map - S S Kalyana Mandapam"
+      ></iframe>
+
+      {/* Transparent Clickable Layer */}
+      <a
+        href={mapLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0"
+        title="Open in Google Maps"
+      ></a>
+  </div>
+</div>
+
+           
           </div>
         </div>
       </div>

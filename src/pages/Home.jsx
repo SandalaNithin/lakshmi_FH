@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight,  X } from "lucide-react";
 import Hall from "../assets/Hall.jpg";
 import Wedinghall from "../assets/Wedinghall.jpg";
 import Birthday from "../assets/Birthday.jpg";
 import Events from "../assets/Events.jpg";
 import { Sparkles, UtensilsCrossed, Camera, Music } from "lucide-react";
+import {useNavigate} from 'react-router-dom';
 
 
 
@@ -14,39 +15,45 @@ export default function Home() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
+  const [successMessage,setSuccessMessage ] = useState("");
+  const [SuccessPopup, setSuccessPopup ] = useState(false); 
 
-  useEffect(() => {
-    const handleClick = () => setShowPopup(false);
-    if (showPopup) document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [showPopup]);
 
+  console.log(SuccessPopup)
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validation checks
-    if (name.trim() === "") {
+    if(!name.trim())  {
       setError("⚠️ Please enter your name");
       return;
     }
-    if (!/^\d{10}$/.test(phone)) {
+    
+     if(!phone || phone.length!==10){
       setError("⚠️ Please enter a valid 10-digit phone number");
       return;
-    }
+     }
 
-    // Clear error and close popup
-    setError("");
-    alert("✅ Thank you! Form submitted successfully.");
 
-    // Close the popup automatically after 2 seconds
-    setTimeout(() => setShowPopup(false), 10);
+     //if valid form
+     setError("");
+      setSuccessMessage("Thank you for submitting the form! We’ll contact you soon.");
+
+    setSuccessPopup(true);
+    
+
+     setTimeout(() => {
+      setSuccessPopup(false);
+      setSuccessMessage("");
+      setShowPopup(false);
+      setName("");
+      setPhone("");
+     }, 1000);
   };
- 
 
 
 
   // All background images
   const heroImages = [Hall, Wedinghall, Birthday, Events];
+  
 
   // Go to next image
   const nextSlide = () => {
@@ -68,19 +75,31 @@ export default function Home() {
     { title: "Events", image: Events },
     
   ];
-
+  const navigate=useNavigate();
+  const handleBookNow=()=>{
+    navigate('/contact');
+  }
 
   // Go to previous image
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   };
 
+  
+
   return (
     <div className="pt-16 relative">
         {/* ---------- POPUP FORM ---------- */}
+      {SuccessPopup && (
+       <div className="fixed top-5 left-1/3 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-[60] text-center animate-bounce">
+        {successMessage}
+        </div>
+      )}
+      
       {showPopup && (
         <div 
           className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+          onClick={() => setShowPopup(false)}
         >
           <div
             className="bg-white p-5 rounded-2xl shadow-5xl w-100 relative"
@@ -90,9 +109,9 @@ export default function Home() {
               onClick={() => setShowPopup(false)}
               className="absolute top-1 right-5 text-gray-500 hover:text-gray-700"
             >
-              <X size={24} />
+              <X size={14} />
             </button>
-            <h2 className="text-2xl font-bold mb-4 text-center text-fuchsia-700">
+            <h2 className="text-3xl font-bold mb-4 text-center text-fuchsia-700">
               Welcome to Lakshmi Function Hall!
             </h2>
 
@@ -102,7 +121,7 @@ export default function Home() {
                 placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-3 focus:ring-blue-400"
               />
               <input
                 type="tel"
@@ -149,7 +168,9 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
             <h1 className="font-Bitcount text-5xl font-bold mb-4">Lakshmi Function Hall</h1>
             <p className="text-2xl mb-4">Bring the Vibe, We'll Bring the Magic</p>
-            <button className="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition-all">
+            <button 
+              onClick={handleBookNow}
+              className="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition-all">
               Book Your Event Now
             </button>
           </div>
@@ -226,6 +247,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+    
       
       {/* ---------- SERVICES SECTION ---------- */}
       <section className="py-16 bg-gray-50 text-center px-6">
@@ -262,8 +284,5 @@ export default function Home() {
         </button>
       </section>
     </div>
-  )
+  );
 }
-
-
-

@@ -88,7 +88,7 @@ export default function Home() {
   
 
   return (
-    <div className="pt-16 relative">
+    <div className=" relative">
         {/* ---------- POPUP FORM ---------- */}
       {SuccessPopup && (
        <div className="fixed top-5 left-1/3 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-[60] text-center animate-bounce">
@@ -279,7 +279,9 @@ export default function Home() {
         <p className="text-lg mb-6 text-slate-500">
           Contact us and let’s make your celebration unforgettable!
         </p>
-        <button className="bg-violet-400 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-100 transition">
+        <button
+        onClick={handleBookNow}
+        className="bg-violet-400 text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-100 transition">
           Contact Us
         </button>
       </section>

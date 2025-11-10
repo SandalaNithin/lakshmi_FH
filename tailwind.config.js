@@ -11,6 +11,16 @@ module.exports = {
         bitcount: ['"Bitcount Grid Single"', 'sans-serif'],
         bebas: ['"Bebas Neue"', 'sans-serif'],
         BBH: ['"BBH Sans Hegarty"', 'sans-serif'],
+        sixtyfour: ['"Sixtyfour"', 'sans-serif'],
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 1s ease-in-out",
       },
     },
   },

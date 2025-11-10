@@ -54,8 +54,9 @@ export default function Contact() {
 
             {/* Header Text */}
             <div className="flex-1">
-              <h1 className="text-4xl font-bold text-amber-900 mb-4">
-                Contact Us to Book Lakshmi Function Hall BuchiReddyPalem for Your Events
+              <h1 className="text-5xl font-bold text-amber-900 mb-4 pt-12">
+                Contact Us to Book Lakshmi Function Hall Near <br/>
+                BuchiReddyPalem for Your Events
               </h1>
               <p className="text-gray-700 mb-4">
                 Thank you for considering Lakshmi Function Halls for your event needs.

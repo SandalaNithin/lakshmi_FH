@@ -1,36 +1,44 @@
-import { useState } from "react";
-import { ChevronLeft, ChevronRight,  X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Hall from "../assets/Hall.jpg";
 import Wedinghall from "../assets/Wedinghall.jpg";
 import Birthday from "../assets/Birthday.jpg";
 import Events from "../assets/Events.jpg";
 import { Sparkles, UtensilsCrossed, Camera, Music } from "lucide-react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showPopup, setShowPopup] = useState(true); // Show form on page load
+  const [showPopup, setShowPopup] = useState(true);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
-  const [successMessage,setSuccessMessage ] = useState("");
-  const [SuccessPopup, setSuccessPopup ] = useState(false); 
+  const [successMessage, setSuccessMessage] = useState("");
+  const [successPopup, setSuccessPopup] = useState(false);
 
 
-  console.log(SuccessPopup)
+  useEffect(() => {
+    const alreadyShown = sessionStorage.getItem("popupShown"); // change to localStorage if you want permanent
+    if (!alreadyShown) {
+      setShowPopup(true);
+      sessionStorage.setItem("popupShown", "true");
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!name.trim())  {
+    if (!name.trim()) {
       setError("⚠️ Please enter your name");
       return;
     }
-    
-     if(!phone || phone.length!==10){
+
+    if (!phone || phone.length !== 10) {
       setError("⚠️ Please enter a valid 10-digit phone number");
       return;
-     }
+    }
+
 
 
      //if valid form
@@ -48,6 +56,7 @@ export default function Home() {
       setPhone("");
      }, 1000);
   };
+
 
 
 
@@ -87,23 +96,24 @@ export default function Home() {
 
   
 
-  return (
-    <div className=" relative">
-        {/* ---------- POPUP FORM ---------- */}
-      {SuccessPopup && (
-       <div className="fixed top-5 left-1/3 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-[60] text-center animate-bounce">
-        {successMessage}
+     return (
+    <div className="relative">
+      {/* ---------- SUCCESS MESSAGE ---------- */}
+      {/* {SuccessPopup && (
+        <div className="fixed top-5 left-1/3 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-[60] text-center animate-bounce">
+          {successMessage}
         </div>
-      )}
-      
+      )} */}
+
+      {/* ---------- POPUP FORM ---------- */}
       {showPopup && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
           onClick={() => setShowPopup(false)}
         >
           <div
             className="bg-white p-5 rounded-2xl shadow-5xl w-100 relative"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setShowPopup(false)}
@@ -128,14 +138,11 @@ export default function Home() {
                 placeholder="Enter phone number"
                 value={phone}
                 onChange={(e) => {
-                  // Allow only numbers up to 10 digits
                   const value = e.target.value.replace(/\D/g, "").slice(0, 10);
                   setPhone(value);
                 }}
                 className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
-
-              {/* Error popup (bottom side) */}
               {error && (
                 <div className="text-red-600 text-sm text-center bg-red-100 p-2 rounded-md animate-bounce">
                   {error}
@@ -153,8 +160,12 @@ export default function Home() {
       )}
 
 
+
+
+
+
       {/* Hero Section */}
-      <section className="relative h-[300px] md:h-[200px] lg:h-[500px] overflow-hidden">
+<section className="relative h-[300px] md:h-[200px] lg:h-[500px] overflow-hidden">
         {/* Background Image */}
         <img
           src={heroImages[currentSlide]}
@@ -166,7 +177,7 @@ export default function Home() {
         {/* Show Text ONLY on First Image */}
         {currentSlide === 0 && (
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h1 className="font-Bitcount text-5xl font-bold mb-4">Lakshmi Function Hall</h1>
+            <h1 className="font-Sixtyfour text-5xl mb-4">Lakshmi Function Hall</h1>
             <p className="text-2xl mb-4">Bring the Vibe, We'll Bring the Magic</p>
             <button 
               onClick={handleBookNow}
@@ -174,7 +185,7 @@ export default function Home() {
               Book Your Event Now
             </button>
           </div>
-        )}
+        )} 
 
         {/* Left Arrow */}
         <button
@@ -191,13 +202,13 @@ export default function Home() {
         >
           <ChevronRight size={28} />
         </button>
-      </section>
+  </section>
 
        {/* ---------- ABOUT SECTION ---------- */}
       <section className="py-16 bg-white-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animation-fadeIn">
               Welcome to Lakshmi Function Hall
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
@@ -212,7 +223,7 @@ export default function Home() {
               />
             </div>
             <div className="space-y-6">
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className=" font-Sixtyfour text-lg text-gray-700 leading-relaxed">
                 At Lakshmi Function Hall, we believe every celebration deserves a perfect venue. Whether it's a grand wedding, a joyful birthday party, or a professional corporate event, we provide exceptional spaces that bring your vision to life.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -288,3 +299,8 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+

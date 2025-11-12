@@ -29,7 +29,7 @@ export default function Contact() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-10">
       {/* Hero Section */}
       <div className="bg-stone-200 py-12 px-4">
         <div className="max-w-7xl mx-auto">

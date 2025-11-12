@@ -177,7 +177,7 @@ export default function Home() {
         {/* Show Text ONLY on First Image */}
         {currentSlide === 0 && (
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h1 className="font-Sixtyfour text-5xl mb-4">Lakshmi Function Hall</h1>
+            <h1 className="font-viewport text-5xl font-bold mb-4">Lakshmi Function Hall</h1>
             <p className="text-2xl mb-4">Bring the Vibe, We'll Bring the Magic</p>
             <button 
               onClick={handleBookNow}
@@ -185,7 +185,7 @@ export default function Home() {
               Book Your Event Now
             </button>
           </div>
-        )} 
+        )}
 
         {/* Left Arrow */}
         <button
@@ -223,7 +223,7 @@ export default function Home() {
               />
             </div>
             <div className="space-y-6">
-              <p className=" font-Sixtyfour text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-gray-700 leading-relaxed">
                 At Lakshmi Function Hall, we believe every celebration deserves a perfect venue. Whether it's a grand wedding, a joyful birthday party, or a professional corporate event, we provide exceptional spaces that bring your vision to life.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -236,7 +236,7 @@ export default function Home() {
 
       {/* ---------- EVENTS SECTION ---------- */}
       <section className="py-20 bg-stone-200 text-center px-6">
-        <h2 className="font-Bebas text-3xl mb-6 text-Rose-900">Celebrate Your Most Cherished Moments in Life at Lakshmi Function Halls – and All Special Occasions Hall in Buchireddypalem,Nellore.</h2>
+        <h2 className="font-Rubik text-3xl mb-6 ">Celebrate Your Most Cherished Moments in Life at Lakshmi Function Halls – and All Special Occasions Hall in Buchireddypalem,Nellore.</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {events.map((event, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">

@@ -17,12 +17,12 @@ const PrivacyPolicy = () => {
              Welcome to <strong>Lakshmi Function Hall</strong> (“we”, “us”, “our”). We
             operate the website{" "}
             <a
-                href="http://localhost:3000/"
+                href="https://lakshmifunctionhall.netlify.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"
             >
-            http://localhost:3000/
+           https://lakshmifunctionhall.netlify.app/
             </a>{" "}
             (the “Website”) in connection with our function-hall services located at{" "}
             <strong>

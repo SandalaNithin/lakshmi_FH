@@ -12,6 +12,7 @@ module.exports = {
         bebas: ['"Bebas Neue"', 'sans-serif'],
         BBH: ['"BBH Sans Hegarty"', 'sans-serif'],
         sixtyfour: ['"Sixtyfour"', 'sans-serif'],
+         rubik80s: ['"Rubik 80s Fade"', 'cursive']
       },
       keyframes: {
         fadeIn: {

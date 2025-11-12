@@ -5,6 +5,7 @@ import AboutUs from './pages/About';
 import Home from './pages/Home';
 import ContactPage from './pages/Contact';
 import PrivacyPolicy from './pages/Privacy';
+import BookingCalendar from './components/BookingCalendar';
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/booking" element={<BookingCalendar />} />
            <Route path="/Privacy" element={<PrivacyPolicy />} />
           </Routes>
         </main>

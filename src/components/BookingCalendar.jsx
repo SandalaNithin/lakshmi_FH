@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CalendarDays, Clock, Check, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import {sendBooking} from "../util/axios";
 
 export default function BookingCalendar() {
   const navigate = useNavigate();
@@ -30,14 +31,44 @@ export default function BookingCalendar() {
     return e;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length) return setErrors(newErrors);
-    setSuccess("✅ Booking request submitted successfully!");
-    setTimeout(() => navigate("/"), 2500);
-    setFormData({ name: "", email: "", phone: "", eventType: "", guests: "", fromDate: "", toDate: "", checkIn: "", checkOut: "", message: "" });
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Validate all fields
+  const newErrors = validate();
+  if (Object.keys(newErrors).length > 0) {
+    return setErrors(newErrors);
+  }
+
+  try {
+    // Send formData to backend using axios
+    await sendBooking(formData);
+
+    setSuccess(" Booking request submitted successfully! Email sent to owner.");
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      eventType: "",
+      guests: "",
+      fromDate: "",
+      toDate: "",
+      checkIn: "",
+      checkOut: "",
+      message: ""
+    });
+
+    // Redirect to Home after 2 seconds
+    setTimeout(() => navigate("/"), 2000);
+
+  } catch (error) {
+    console.error("Booking Error:", error);
+    alert("❌ Failed to submit booking. Please check backend server.");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">

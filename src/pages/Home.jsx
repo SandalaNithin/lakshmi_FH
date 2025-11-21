@@ -1,59 +1,16 @@
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, X, Check } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Hall from "../assets/Hall.jpg";
 import Wedinghall from "../assets/Wedinghall.jpg";
 import Birthday from "../assets/Birthday.jpg";
 import Events from "../assets/Events.jpg";
 import { Sparkles, UtensilsCrossed, Camera, Music } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
-  const [successPopup, setSuccessPopup] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
-useEffect(() => {
-  const alreadyShown = sessionStorage.getItem("popupShown");
-  if (!alreadyShown) {
-    const timer = setTimeout(() => {
-      setShowPopup(true);
-      sessionStorage.setItem("popupShown", "true");
-    }, 800); // Delay popup by 0.8s for smoother UX
-
-    return () => clearTimeout(timer);
-  }
-}, []);
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name.trim()) {
-      setError("⚠️ Please enter your name");
-      return;
-    }
-    if (!phone || phone.length !== 10) {
-      setError("⚠️ Please enter a valid 10-digit phone number");
-      return;
-    }
-
-    setError("");
-    setSuccessMessage("✅ Thank you! We’ll contact you soon.");
-    setSuccessPopup(true);
-
-    // Reset popup after short delay
-    setTimeout(() => {
-      setSuccessPopup(false);
-      setSuccessMessage("");
-      setShowPopup(false);
-      setName("");
-      setPhone("");
-    }, 2000);
-  };
 
   const heroImages = [Hall, Wedinghall, Birthday, Events];
 
@@ -80,104 +37,52 @@ useEffect(() => {
 
   return (
     <div className="relative">
-  {/* ✅ Success Popup */}
-  {successPopup && (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999] animate-fadeIn">
-      <div className="bg-white p-6 rounded-xl shadow-2xl text-center">
-        <Check size={40} className="text-green-600 mx-auto mb-3" />
-        <h2 className="text-xl font-semibold text-green-700">{successMessage}</h2>
-      </div>
-    </div>
-  )}
 
-  {/* ✅ Initial Form Popup */}
-  {showPopup && (
-    <div
-      className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9998] animate-fadeIn"
-      onClick={() => setShowPopup(false)}
-    >
-      <div
-        className="bg-white p-6 rounded-2xl shadow-2xl w-80 relative"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={() => setShowPopup(false)}
-          className="absolute top-2 right-3 text-gray-500 hover:text-gray-700"
-        >
-          <X size={18} />
-        </button>
-
-        <h2 className="text-2xl font-bold mb-4 text-center text-indigo-700">
-          Welcome to Lakshmi Function Hall!
-        </h2>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          <input
-            type="tel"
-            placeholder="Enter phone number"
-            value={phone}
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, "").slice(0, 10);
-              setPhone(value);
-            }}
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {error && (
-            <p className="text-red-600 text-sm bg-red-100 p-2 rounded-md text-center">
-              {error}
-            </p>
-          )}
-          <button
-            type="submit"
-            className="bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition font-semibold"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
-  )}
-
-
-      {/* Hero Section */}
-      <section className="relative h-[300px] md:h-[200px] lg:h-[500px] overflow-hidden">
-        <img
+      {/* Hero Section - Fullscreen */}
+      <section className="relative h-screen overflow-hidden">
+        <motion.img
+          key={currentSlide}
           src={heroImages[currentSlide]}
           alt="Slide"
-          className="w-full h-full object-cover transition-all duration-700"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9 }}
+          className="w-full h-full object-cover bg-center bg-cover"
         />
-        <div className="absolute inset-0 bg-black/40"></div>
 
-        {currentSlide === 0 && (
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Lakshmi Function Hall</h1>
-            <p className="text-lg md:text-2xl mb-6">Bring the Vibe, We'll Bring the Magic</p>
-            <button
-              onClick={handleBookNow}
-              className="bg-white text-indigo-900 px-6 py-3 rounded-full font-semibold hover:bg-indigo-100 transition-all"
-            >
-              Book Your Event Now
-            </button>
-          </div>
-        )}
+        <div className="absolute inset-0 bg-black/35 pointer-events-none"></div>
+
+        {/* Hero Text */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+          className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 z-10"
+        >
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 drop-shadow-lg">
+            Lakshmi Function Hall
+          </h1>
+          <p className="text-lg md:text-2xl lg:text-3xl mb-6 drop-shadow-md">
+            Bring the Vibe, We’ll Bring the Magic
+          </p>
+          <button
+            onClick={handleBookNow}
+            className="bg-white text-indigo-900 px-6 py-3 rounded-full font-semibold hover:bg-indigo-100 transition-all"
+          >
+            Book Your Event Now
+          </button>
+        </motion.div>
 
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full z-20"
         >
           <ChevronLeft size={28} />
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full z-20"
         >
           <ChevronRight size={28} />
         </button>
@@ -212,7 +117,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Events */}
+      {/* Events Section */}
       <section className="py-20 bg-stone-200 text-center px-6">
         <h2 className="text-3xl mb-6 font-semibold">
           Celebrate Your Most Cherished Moments at Lakshmi Function Hall
@@ -267,4 +172,3 @@ useEffect(() => {
     </div>
   );
 }
-

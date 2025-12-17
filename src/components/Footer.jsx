@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
-import { Facebook, Instagram, Twitter} from 'lucide-react';
-import { FaPhoneAlt,FaWhatsapp } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Twitter, Phone } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,10 +9,7 @@ export default function Footer() {
   const footerLinks = [
     { id: 'about', label: 'About Us', path: '/about' },
     { id: 'contact', label: 'Contact', path: '/contact' },
-    {id: 'Gallery', label: 'Gallery', path: '/Gallery' },
     { id: 'privacy', label: 'Privacy Policy', path: '/privacy' },
- 
-    // Removed Terms & Conditions
   ];
 
   const socialLinks = [
@@ -20,58 +17,56 @@ export default function Footer() {
     { icon: Instagram, url: 'https://instagram.com', label: 'Instagram' },
     { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
     { icon: FaWhatsapp, url: 'https://wa.me/9347314512', label: 'WhatsApp' },
-    { icon: FaPhoneAlt, url: 'https://tel:+9347314512', label: 'Phone' },
   ];
 
   return (
-    <footer className="bg-gray-100 decoration-black mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-gray-100 mt-0 pt-16 pb-8 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Floating Actions */}
         <div className="fixed bottom-6 right-6 flex flex-col items-center space-y-3 z-50">
           <a
-        href="https://wa.me/9347314512"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center  shadow-xl border-4 border-green transition-all duration-100  hover:scale-110  z-500"
-        aria-label="Chat on WhatsApp"
-      >
-        <FaWhatsapp size={35} />
-      </a>
-      <a
-        href="tel:+9347314512"
-        className="fixed bottom-5 left-8 bg-yellow-500 hover:bg-yellow-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 font-circular z-500"
-        aria-label="Call Us"
-        >
-        <FaPhoneAlt size={35} />
-        </a>
-     </div>
-        
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          
-          {/* Logo and Brand */}
-          <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-blue-400 rounded-md flex items-center justify-center">
-                <span className="text-white font-bold text-lg">L</span>
+            href="https://wa.me/9347314512"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-200"
+            aria-label="Chat on WhatsApp"
+          >
+            <FaWhatsapp size={32} />
+          </a>
+          <a
+            href="tel:+9347314512"
+            className="bg-amber-500 hover:bg-amber-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-200"
+            aria-label="Call Us"
+          >
+            <Phone size={28} />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+          {/* Brand */}
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+              <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
+                L
               </div>
-              <div>
-                <p className="font-bold text-3xl text-zinc-700">Lakshmi Function Hall</p>
-              </div>
+              <span className="font-bold text-2xl text-gray-800 tracking-tight">Lakshmi Function Hall</span>
             </div>
-            <p className="text-gray-400 text-lg text-center md:text-left">
-              Lakshmi Function has been a trusted name in the Function hall industry.
+            <p className="text-gray-500 leading-relaxed max-w-sm mx-auto md:mx-0">
+              Lakshmi Function Hall has been a trusted name in the industry, creating unforgettable memories for every celebration.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-col items-center">
-            <h3 className="text-3xl font-semibold mb-4 text-blue-400 ">Quick Links</h3>
-            <ul className="space-y-2 text-left">
+          <div className="text-center">
+            <h3 className="text-lg font-bold mb-6 text-gray-900">Quick Links</h3>
+            <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.id}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 text-sm"
+                    className="text-gray-600 hover:text-indigo-600 transition-colors font-medium"
                   >
                     {link.label}
                   </Link>
@@ -81,21 +76,21 @@ export default function Footer() {
           </div>
 
           {/* Social Media */}
-          <div className="flex flex-col items-center md:items-end">
-            <h3 className="text-lg font-semibold mb-4 text-blue-400">Follow Us</h3>
-            <div className="flex gap-4">
+          <div className="text-center md:text-right">
+            <h3 className="text-lg font-bold mb-6 text-gray-900">Follow Us</h3>
+            <div className="flex justify-center md:justify-end gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
                   <a
                     key={social.label}
                     href={social.url}
-                    className="w-10 h-10 bg-white-800 hover:bg-blue-300 rounded-full flex items-center justify-center transition-colors duration-300"
+                    className="w-12 h-12 bg-white text-gray-600 hover:bg-indigo-600 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 shadow-sm border border-gray-100"
                     aria-label={social.label}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Icon size={30} />
+                    <Icon size={22} />
                   </a>
                 );
               })}
@@ -104,12 +99,12 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-slate-700 my-8"></div>
+        <div className="border-t border-gray-200 my-8"></div>
 
         {/* Copyright */}
         <div className="text-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} <span className="text-blue-400 font-semibold">Lakshmi Function Hall</span>. All rights reserved.
+            © {currentYear} <span className="text-indigo-600 font-semibold">Lakshmi Function Hall</span>. All rights reserved.
           </p>
         </div>
       </div>

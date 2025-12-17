@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heart, Users, Award, Diamond } from 'lucide-react';
-
+import SEOWrapper from '../components/SEOWrapper';
 
 export default function AboutUs() {
   const features = [
@@ -27,63 +27,77 @@ export default function AboutUs() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gray-50">
+      <SEOWrapper
+        title="About Us"
+        description="Learn about Lakshmi Function Hall's story, values, and commitment to making your events unforgettable."
+      />
+
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-red-900 via-blue-800 to-red-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+      <div className="bg-indigo-900 text-white py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-900/20 pattern-grid-lg opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
             About Lakshmi Function Hall
           </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-indigo-200 max-w-3xl mx-auto font-light">
             Where Every Celebration Finds Its Perfect Home
           </p>
         </div>
       </div>
 
-                                                 {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
+
         {/* Introduction */}
-        <div className="mb-16">
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-16">
+        <div className="mb-20 text-center max-w-4xl mx-auto">
+          <p className="text-xl text-gray-700 leading-relaxed">
             At Lakshmi Function Hall, we believe that life's most cherished moments deserve extraordinary spaces. Whether you're celebrating a wedding, hosting a corporate event, or gathering loved ones for a milestone occasion, we provide the perfect backdrop for memories that last a lifetime.
           </p>
         </div>
 
         {/* Our Story */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-4 border-blue-600">
-            <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              Lakshmi Function Hall was born from a simple yet profound realization: every celebration is unique, and the venue should reflect that individuality. What began as a dream to create versatile, elegant spaces has blossomed into a premier destination for those who seek more than just a venue — they seek an experience.
-            </p>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              Founded on the principles of hospitality, attention to detail, and genuine care for our clients, we've transformed countless visions into reality. From intimate gatherings to grand celebrations, we've been honored to play a part in life's most meaningful moments.
-            </p>
+        <div className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Our Story</h2>
+            <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+              <p>
+                Lakshmi Function Hall was born from a simple yet profound realization: every celebration is unique, and the venue should reflect that individuality. What began as a dream to create versatile, elegant spaces has blossomed into a premier destination.
+              </p>
+              <p>
+                Founded on the principles of hospitality, attention to detail, and genuine care for our clients, we've transformed countless visions into reality.
+              </p>
+            </div>
+          </div>
+          <div className="bg-indigo-100 rounded-2xl p-8 h-full flex items-center justify-center">
+            {/* Placeholder for an About Image if needed, or maintain the clean text look */}
+            <div className="text-indigo-800 text-center">
+              <Heart size={64} className="mx-auto mb-4 opacity-50" />
+              <p className="font-serif italic text-2xl">"Creating Memories, Celebrating Life"</p>
+            </div>
           </div>
         </div>
 
         {/* What Sets Us Apart */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
             What Sets Us Apart
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
                 <div
                   key={feature.title}
-                  className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300 border border-gray-100"
                 >
-                  <div className="flex items-start gap-10">
+                  <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Icon className="text-blue-600" size={24} />
+                      <div className="w-14 h-14 bg-indigo-50 rounded-lg flex items-center justify-center">
+                        <Icon className="text-indigo-600" size={28} />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
                         {feature.title}
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
@@ -97,38 +111,15 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Our Commitment */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-left">Our Commitment</h2>
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12">
-            <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              We understand that planning an event can be overwhelming. That's why we've committed ourselves to making the process as smooth and enjoyable as the celebration itself. Our team listens, adapts, and delivers with warmth and professionalism, ensuring that your vision becomes reality without compromise.
-            </p>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              Every event we host is a partnership built on trust, creativity, and a shared commitment to excellence. We don't just provide a space — we provide peace of mind.
-            </p>
-          </div>
-        </div>
-
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-8 md:p-12 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Celebration Awaits</h2>
-          <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Whether you're dreaming of an elegant wedding reception, a sophisticated corporate gathering, or an intimate family celebration, Lakshmi Function Hall is ready to welcome you.
-          </p>
-          <p className="text-xl font-semibold mb-8">
+        <div className="bg-gradient-to-r from-indigo-700 to-blue-600 rounded-3xl p-10 md:p-16 text-center text-white shadow-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Your Celebration Awaits</h2>
+          <p className="text-lg md:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
             Come visit us, explore our spaces, and let's begin creating something beautiful together.
           </p>
-          <button className="bg-white text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-colors duration-300 shadow-lg">
+          <a href="/contact" className="inline-block bg-white text-indigo-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg">
             Contact Us Today
-          </button>
-        </div>
-
-        {/* Tagline */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 text-lg italic">
-            Lakshmi Function Hall — Creating Memories, Celebrating Life
-          </p>
+          </a>
         </div>
       </div>
     </div>

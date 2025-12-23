@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarDays, Check, Users, Info, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { sendBooking } from "../util/axios";
+import { sendBooking, getBlockedDates } from "../util/axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import { format, parseISO, isWithinInterval } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function BookingCalendar() {
@@ -15,6 +15,59 @@ export default function BookingCalendar() {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [blockedDateRanges, setBlockedDateRanges] = useState([]);
+  const [isLoadingDates, setIsLoadingDates] = useState(true);
+
+  // Fetch blocked dates on component mount
+  useEffect(() => {
+    const fetchBlockedDates = async () => {
+      try {
+        console.log("🟢 Fetching blocked dates from API...");
+        const response = await getBlockedDates();
+        console.log("🟢 API Response:", response.data);
+        if (response.data.success) {
+          setBlockedDateRanges(response.data.data);
+          console.log("🟢 Blocked Date Ranges Set:", response.data.data);
+        }
+      } catch (error) {
+        console.error("❌ Failed to fetch blocked dates:", error);
+      } finally {
+        setIsLoadingDates(false);
+      }
+    };
+    fetchBlockedDates();
+  }, []);
+
+  // Helper function to check if a date is blocked
+  const isDateBlocked = (date) => {
+    if (!date) return false;
+
+    const blocked = blockedDateRanges.some(range => {
+      const from = parseISO(range.fromDate);
+      const to = parseISO(range.toDate);
+
+      // Set time to midnight for accurate date comparison
+      const checkDate = new Date(date);
+      checkDate.setHours(0, 0, 0, 0);
+      from.setHours(0, 0, 0, 0);
+      to.setHours(0, 0, 0, 0);
+
+      return isWithinInterval(checkDate, { start: from, end: to });
+    });
+    
+    if (blocked) {
+      console.log("🔴 Date blocked:", format(date, "yyyy-MM-dd"));
+    }
+    return blocked;
+  };
+
+  // Custom day class for styling blocked dates
+  const getDayClassName = (date) => {
+    if (isDateBlocked(date)) {
+      return "blocked-date";
+    }
+    return undefined;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -155,6 +208,8 @@ export default function BookingCalendar() {
                     startDate={formData.fromDate}
                     endDate={formData.toDate}
                     minDate={new Date()}
+                    filterDate={(date) => !isDateBlocked(date)}
+                    dayClassName={getDayClassName}
                     placeholderText="Select start date"
                     className={`w-full border ${errors.fromDate ? "border-red-500 bg-red-50" : "border-gray-300"} rounded-lg px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none w-full block`}
                     wrapperClassName="w-full"
@@ -170,6 +225,8 @@ export default function BookingCalendar() {
                     startDate={formData.fromDate}
                     endDate={formData.toDate}
                     minDate={formData.fromDate || new Date()}
+                    filterDate={(date) => !isDateBlocked(date)}
+                    dayClassName={getDayClassName}
                     placeholderText="Select end date"
                     className={`w-full border ${errors.toDate ? "border-red-500 bg-red-50" : "border-gray-300"} rounded-lg px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none w-full block`}
                     wrapperClassName="w-full"

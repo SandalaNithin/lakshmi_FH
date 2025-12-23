@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://server-1-ghbe.onrender.com",
 });
 
 export const sendBooking = (data) => API.post("/api/booking", data);
+export const getBlockedDates = () => API.get("/api/booking/blocked-dates");
+

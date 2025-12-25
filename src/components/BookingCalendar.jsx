@@ -54,7 +54,7 @@ export default function BookingCalendar() {
 
       return isWithinInterval(checkDate, { start: from, end: to });
     });
-    
+
     if (blocked) {
       console.log("🔴 Date blocked:", format(date, "yyyy-MM-dd"));
     }
@@ -66,7 +66,7 @@ export default function BookingCalendar() {
     if (isDateBlocked(date)) {
       return "blocked-date";
     }
-    return undefined;
+    return null;
   };
 
   const handleChange = (e) => {
